@@ -4,7 +4,7 @@ import logging as log
 
 def run():
     valid_count = 0
-
+    puzzle_two_count = 0
     with open('DayTwoData.csv', 'r') as csvfile:
         spam_reader = csv.reader(csvfile, delimiter='\n')
         for row in spam_reader:
@@ -22,8 +22,17 @@ def run():
             is_valid = min_required <= count <= max_allowed
             if is_valid:
                 valid_count += 1
+            # Puzzle two
+            first_position = min_required
+            second_position = max_allowed
+            is_first = char == password[(min_required - 1)]
+            is_second = char == password[(max_allowed - 1)]
+
+            if (is_first and not is_second) or (not is_first and is_second):
+                puzzle_two_count += 1
 
     log.info('valid count is {0}'.format(valid_count))
+    log.info('valid count puzzle two is {0}'.format(puzzle_two_count))
 
 
 if __name__ == '__main__':
