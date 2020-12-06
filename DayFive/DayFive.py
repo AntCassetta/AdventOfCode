@@ -36,8 +36,16 @@ def run():
         seat_ids.append(seat_id)
 
     log.info(f'Highest boarding pass ID {max(seat_ids)}')
+    return seat_ids
+
+
+def my_seat(seat_map):
+    seat_map.sort()
+    seat = [x for x in range(seat_map[0], seat_map[-1] + 1) if x not in seat_map]
+    log.info(f'My seat is: {seat}')
 
 
 if __name__ == '__main__':
     log.basicConfig(format='%(levelname)s:%(message)s', level=log.DEBUG)
-    run()
+    taken_seats = run()
+    my_seat(taken_seats)
